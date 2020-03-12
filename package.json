@@ -1,0 +1,19 @@
+{
+  "name": "covidAPI",
+  "version": "1.0.0",
+  "description": "A web scraping API that's easily accessible.",
+  "main": "index.js",
+  "repository": "https://github.com/alekangelov/Covid-19-API",
+  "author": "Alek Angelov",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
