@@ -1,5 +1,10 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const fs = require("fs");
+const path = require("path");
+
+const indexPath = path.join(__dirname, "/stats/index.json");
+const countriesPath = path.join(__dirname, "/stats/countries.json");
 
 async function scrape(url) {
   let page,
@@ -51,12 +56,50 @@ async function scrape(url) {
       }
     });
     Return = { ...Return, activeCases, closedCases };
-    // Return.cases = allCases;
+    fs.writeFile(indexPath, JSON.stringify(Return), e => e);
+    const makeCountry = ([
+      country,
+      total,
+      newCases,
+      totalDeaths,
+      newDeaths,
+      totalRecovered,
+      activeCases,
+      criticalCases,
+      totalCasesPerMillion
+    ]) => {
+      return {
+        country,
+        total,
+        newCases,
+        totalDeaths,
+        newDeaths,
+        totalRecovered,
+        activeCases,
+        criticalCases,
+        totalCasesPerMillion
+      };
+    };
+    const countries = [];
+    $($("#main_table_countries tbody")[0])
+      .find("tr")
+      .each((i, e) => {
+        const body = [];
+        $(e)
+          .find("td")
+          .each((i, x) => {
+            body.push(
+              $(x)
+                .text()
+                .trim()
+            );
+          });
+        countries.push(makeCountry(body));
+      });
+    fs.writeFile(countriesPath, JSON.stringify(countries), e => e);
   } catch (e) {
     console.log(e);
   }
-  console.log(Return);
-  return Return;
 }
 
-module.exports = { scrape };
+module.exports = { scrape, countriesPath, indexPath };

@@ -6,7 +6,7 @@
   "repository": "https://github.com/alekangelov/Covid-19-API",
   "author": "Alek Angelov",
   "scripts": {
-    "dev": "nodemon index.js",
+    "dev": "nodemon index.js --ignore '*.json'",
     "start": "node index.js"
   },
   "license": "MIT",
