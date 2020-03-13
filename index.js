@@ -1,8 +1,8 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-// const SCRAPE_URL = "https://www.worldometers.info/coronavirus/";
-const SCRAPE_URL = "http://localhost:3000/test";
+const SCRAPE_URL = "https://www.worldometers.info/coronavirus/";
+// const SCRAPE_URL = "http://localhost:3000/test";
 const PORT = 3000;
 const { scrape } = require("./scraper");
 (async function init() {
